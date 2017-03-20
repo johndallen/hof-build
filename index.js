@@ -17,6 +17,9 @@ module.exports = options => {
   if (options['watch-node-modules']) {
     settings.watchNodeModules = true;
   }
+  if (options['verbose']) {
+    settings.verbose = true;
+  }
 
   const task = options._[0] || 'build';
 

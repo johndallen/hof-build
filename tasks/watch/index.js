@@ -54,6 +54,9 @@ module.exports = config => {
   function rebuild() {
     let jobs = [];
     toBuild.forEach(path => {
+      if (config.verbose) {
+        console.log(`${chalk.yellow('Changed')}: ${path}`)
+      }
       jobs = jobs.concat(triggersTask(path));
     });
     jobs = uniq(jobs);

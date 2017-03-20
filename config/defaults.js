@@ -30,6 +30,7 @@ module.exports = {
   watch: {
     ignore: [
       '*.log',
+      '.git',
       'public'
     ]
   }
