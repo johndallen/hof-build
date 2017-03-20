@@ -7,7 +7,7 @@
     "hof-build": "./bin/hof-build"
   },
   "scripts": {
-    "test": "eslint ."
+    "test": "eslint . && eslint bin/hof-build"
   },
   "repository": {
     "type": "git",
