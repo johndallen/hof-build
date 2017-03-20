@@ -32,6 +32,14 @@ The default settings will match those for an app generated using [`hof-generator
 hof-build --config /path/to/my/config.js
 ```
 
+Any task can be disabled by setting its configuration to `false` (or any falsy value).
+
+```js
+module.exports = {
+  browserify: false
+};
+```
+
 ### Configuration options
 
 Each task has a common configuration format with the following options:

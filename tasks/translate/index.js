@@ -5,6 +5,10 @@ const witch = require('witch');
 
 module.exports = config => {
 
+  if (!config.translate) {
+    return Promise.resolve();
+  }
+
   const args = [config.translate.src];
   if (config.translate.shared) {
     const shared = [].concat(config.translate.shared);
@@ -14,6 +18,5 @@ module.exports = config => {
   }
 
   return spawn(witch('hof-transpiler'), args);
-
 };
 module.exports.task = 'compile translations';

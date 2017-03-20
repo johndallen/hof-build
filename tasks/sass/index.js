@@ -8,6 +8,10 @@ const mkdir = require('../../lib/mkdir');
 
 module.exports = config => {
 
+  if (!config.sass) {
+    return Promise.resolve();
+  }
+
   const out = path.resolve(process.cwd(), config.sass.out);
 
   return mkdir(out)

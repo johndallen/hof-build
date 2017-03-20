@@ -7,6 +7,11 @@ const path = require('path');
 const mkdir = require('../../lib/mkdir');
 
 module.exports = config => {
+
+  if (!config.browserify) {
+    return Promise.resolve();
+  }
+
   const out = path.resolve(process.cwd(), config.browserify.out);
 
   return mkdir(out)
