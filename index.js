@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const merge = require('lodash.merge');
 const config = require('./config/defaults');
 
@@ -10,7 +11,7 @@ module.exports = options => {
   merge(settings, config);
 
   if (options.config) {
-    merge(settings, require(options.config));
+    merge(settings, require(path.resolve(process.cwd(), options.config)));
   }
 
   if (options['watch-node-modules']) {
