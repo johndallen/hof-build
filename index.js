@@ -1,29 +1,30 @@
 'use strict';
 
+const merge = require('lodash.merge');
+const config = require('./config/defaults');
+
 module.exports = options => {
 
-  const merge = require('lodash.merge');
+  const settings = {};
 
-  const config = require('./config/defaults');
+  merge(settings, config);
 
   if (options.config) {
-    merge(config, require(options.config));
+    merge(settings, require(options.config));
   }
 
-  merge(config, {
-    watchNodeModules: options['watch-node-modules']
-  });
+  if (options['watch-node-modules']) {
+    settings.watchNodeModules = true;
+  }
 
   const task = options._[0] || 'build';
 
-  let runner;
-
   try {
-    runner = require(`./tasks/${task}`);
+    require.resolve(`./tasks/${task}`);
   } catch (e) {
     throw new Error(`Unknown task: ${task}`);
   }
 
-  return runner(config);
+  return require(`./tasks/${task}`)(settings);
 
 };
