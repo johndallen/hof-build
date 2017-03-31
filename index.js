@@ -10,6 +10,15 @@ module.exports = options => {
 
   merge(settings, config);
 
+  // load settings from ./hof.settings.json if it exists
+  try {
+    const localConfig = path.resolve(process.cwd(), './hof.settings.json');
+    const hofSettings = require(path.resolve(process.cwd(), './hof.settings.json')).build;
+    console.log(`Found local config at ${localConfig}`);
+    merge(settings, hofSettings);
+  } catch (e) {/* ignore */}
+
+  // load override config file if defined
   if (options.config) {
     merge(settings, require(path.resolve(process.cwd(), options.config)));
   }
