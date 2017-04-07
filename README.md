@@ -26,7 +26,11 @@ You can additionally run a `watch` task to start a server instance, which will a
 
 ## Configuration
 
-The default settings will match those for an app generated using [`hof-generator`](https://npmjs.com/hof-generator). To override any of the configuration settings you can define a path to a local config file, which will be merged with [the default configuration](./config/defaults.js)
+The default settings will match those for an app generated using [`hof-generator`](https://npmjs.com/hof-generator).
+
+If a `hof.settings.json` file is found in the application root, then the `build` section of the settings file will be used to override [the default configuration](./config/defaults.js).
+
+Alternatively you can define a path to a local config file by passing a `--config` option
 
 ```
 hof-build --config /path/to/my/config.js
