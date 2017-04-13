@@ -32,7 +32,7 @@ module.exports = options => {
   if (options['watch-node-modules']) {
     settings.watchNodeModules = true;
   }
-  if (options['verbose']) {
+  if (options.verbose) {
     settings.verbose = true;
   }
 

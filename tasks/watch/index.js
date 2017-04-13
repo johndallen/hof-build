@@ -55,7 +55,7 @@ module.exports = config => {
     let jobs = [];
     toBuild.forEach(path => {
       if (config.verbose) {
-        console.log(`${chalk.yellow('Changed')}: ${path}`)
+        console.log(`${chalk.yellow('Changed')}: ${path}`);
       }
       jobs = jobs.concat(triggersTask(path));
     });
