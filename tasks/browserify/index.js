@@ -3,6 +3,7 @@
 const browserify = require('browserify');
 const fs = require('fs');
 const path = require('path');
+const minify = require('./compress');
 
 const mkdir = require('../../lib/mkdir');
 
@@ -18,10 +19,16 @@ module.exports = config => {
     .then(() => {
       return new Promise((resolve, reject) => {
         const bundler = browserify(config.browserify.src);
-        const stream = bundler.bundle().pipe(fs.createWriteStream(out));
+
+        let stream = bundler.bundle();
+        if (config.browserify.compress || config.production) {
+          stream = stream.pipe(minify());
+        }
+        stream.pipe(fs.createWriteStream(out));
+
         stream.on('finish', resolve).on('error', reject);
       });
     });
-
 };
+
 module.exports.task = 'browserify';

@@ -5,7 +5,8 @@ module.exports = {
     src: 'assets/js/index.js',
     out: 'public/js/bundle.js',
     match: 'assets/js/**/*.js',
-    restart: false
+    restart: false,
+    compress: false
   },
   sass: {
     src: 'assets/scss/app.scss',
