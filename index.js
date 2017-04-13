@@ -12,14 +12,15 @@ module.exports = options => {
 
   // load settings from ./hof.settings.json if it exists
   let localConfig;
+  let hofSettings;
   try {
     localConfig = path.resolve(process.cwd(), './hof.settings.json');
+    hofSettings = require(localConfig).build;
   } catch (e) {
     // ignore error for missing config file
   }
 
-  if (localConfig) {
-    const hofSettings = require(localConfig).build;
+  if (hofSettings) {
     console.log(`Found local config at ${localConfig}`);
     merge(settings, hofSettings);
   }
