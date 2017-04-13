@@ -28,6 +28,9 @@ module.exports = options => {
   if (options.config) {
     merge(settings, require(path.resolve(process.cwd(), options.config)));
   }
+  if (options.production || process.env.NODE_ENV === 'production') {
+    settings.production = true;
+  }
 
   if (options['watch-node-modules']) {
     settings.watchNodeModules = true;
