@@ -24,7 +24,7 @@ module.exports = config => {
         if (config.browserify.compress || config.production) {
           stream = stream.pipe(minify());
         }
-        stream.pipe(fs.createWriteStream(out));
+        stream = stream.pipe(fs.createWriteStream(out));
 
         stream.on('finish', resolve).on('error', reject);
       });
