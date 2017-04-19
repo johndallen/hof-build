@@ -49,6 +49,9 @@ module.exports = options => {
     throw new Error(`Unknown task: ${task}`);
   }
 
-  return require(`./tasks/${task}`)(settings);
+  return require(`./tasks/${task}`)(settings)
+    .catch(e => {
+      throw e;
+    });
 
 };
