@@ -17,7 +17,11 @@ module.exports = config => {
   return mkdir(out)
     .then(() => {
       return new Promise((resolve, reject) => {
-        sass(config.sass.src, (err, result) => {
+        const aliases = {};
+        if (config.theme) {
+          aliases.$$theme = `hof-theme-${config.theme}`;
+        }
+        sass(config.sass.src, { aliases }, (err, result) => {
           return err ? reject(err) : resolve(result.css);
         });
       });
