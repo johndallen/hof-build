@@ -29,6 +29,7 @@ module.exports = {
     extensions: ['.js', '.json', '.html']
   },
   watch: {
+    restart: 'rs',
     ignore: [
       '*.log',
       '.git',

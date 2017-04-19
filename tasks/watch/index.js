@@ -38,11 +38,18 @@ module.exports = config => {
   function restart() {
     if (server) {
       server.kill();
+      server.removeAllListeners();
       console.log(chalk.green('Restarting due to changes'));
     }
     const args = config.server.cmd.split(' ');
     const cmd = args.shift();
-    server = cp.spawn(cmd, args, { stdio: 'inherit' });
+    server = cp.spawn(cmd, args, { stdio: ['ignore', 'inherit', 'inherit'] });
+
+    server.on('exit', code => {
+      if (code) {
+        console.log(chalk.red('Server exited with non-zero exit code. Awaiting code changes.'));
+      }
+    });
   }
 
   function detectRestart(jobs, files) {
@@ -75,7 +82,19 @@ module.exports = config => {
       });
   }
 
+  function stdin() {
+    process.stdin.resume();
+    process.stdin.setEncoding('utf8');
+    process.stdin.on('data', data => {
+      data = (data + '').trim().toLowerCase();
+      if (data === config.watch.restart) {
+        restart();
+      }
+    });
+  }
+
   function watch() {
+
     return new Promise(resolve => {
 
       const ignored = [].concat(config.watch.ignore);
@@ -97,6 +116,7 @@ module.exports = config => {
           toBuild.push(file);
           throttledRebuild();
         });
+        stdin();
         resolve();
       });
 
