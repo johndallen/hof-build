@@ -71,6 +71,7 @@ module.exports = config => {
     if (toBuild.indexOf('hof.settings.json') > -1) {
       console.log(chalk.red('Build configuration modified. Manual restart required.'));
       server.kill();
+      // eslint-disable-next-line no-process-exit
       process.exit();
     }
 
