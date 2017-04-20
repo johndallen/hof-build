@@ -68,6 +68,12 @@ module.exports = config => {
     });
     jobs = uniq(jobs);
 
+    if (toBuild.indexOf('hof.settings.json') > -1) {
+      console.log(chalk.red('Build configuration modified. Manual restart required.'));
+      server.kill();
+      process.exit();
+    }
+
     jobs.forEach(job => {
       console.log(`Executing build task: ${chalk.green(job)}`);
     });
