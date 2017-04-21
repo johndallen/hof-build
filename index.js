@@ -15,7 +15,7 @@ module.exports = options => {
   let hofSettings;
   try {
     localConfig = path.resolve(process.cwd(), './hof.settings.json');
-    hofSettings = require(localConfig).build;
+    hofSettings = require(localConfig).build || {};
     hofSettings.theme = require(localConfig).theme;
   } catch (e) {
     // ignore error for missing config file
