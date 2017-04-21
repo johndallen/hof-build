@@ -16,6 +16,7 @@ module.exports = options => {
   try {
     localConfig = path.resolve(process.cwd(), './hof.settings.json');
     hofSettings = require(localConfig).build;
+    hofSettings.theme = require(localConfig).theme;
   } catch (e) {
     // ignore error for missing config file
   }
@@ -48,6 +49,9 @@ module.exports = options => {
     throw new Error(`Unknown task: ${task}`);
   }
 
-  return require(`./tasks/${task}`)(settings);
+  return require(`./tasks/${task}`)(settings)
+    .catch(e => {
+      throw e;
+    });
 
 };

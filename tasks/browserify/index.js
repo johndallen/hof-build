@@ -19,7 +19,13 @@ module.exports = config => {
     .then(() => {
       return new Promise((resolve, reject) => {
         const bundler = browserify(config.browserify.src);
-
+        if (config.theme) {
+          bundler.transform(require('aliasify'), {
+            aliases: {
+              '$$theme': `hof-theme-${config.theme}`
+            }
+          });
+        }
         let stream = bundler.bundle();
         if (config.browserify.compress || config.production) {
           stream = stream.pipe(minify());
