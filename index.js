@@ -15,7 +15,7 @@ module.exports = options => {
   let hofSettings;
   try {
     localConfig = path.resolve(process.cwd(), './hof.settings');
-    hofSettings = require(localConfig).build;
+    hofSettings = require(localConfig).build || {};
     hofSettings.theme = require(localConfig).theme;
   } catch (e) {
     // ignore error for missing config file
@@ -30,16 +30,10 @@ module.exports = options => {
   if (options.config) {
     merge(settings, require(path.resolve(process.cwd(), options.config)));
   }
-  if (options.production || process.env.NODE_ENV === 'production') {
-    settings.production = true;
-  }
 
-  if (options['watch-node-modules']) {
-    settings.watchNodeModules = true;
-  }
-  if (options.verbose) {
-    settings.verbose = true;
-  }
+  settings.production = options.production || process.env.NODE_ENV === 'production';
+  settings.watchNodeModules = options['watch-node-modules'];
+  settings.verbose = options.verbose;
 
   const task = options._[0] || 'build';
 
