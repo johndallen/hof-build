@@ -14,7 +14,7 @@ module.exports = options => {
   let localConfig;
   let hofSettings;
   try {
-    localConfig = path.resolve(process.cwd(), './hof.settings.json');
+    localConfig = path.resolve(process.cwd(), './hof.settings');
     hofSettings = require(localConfig).build || {};
     hofSettings.theme = require(localConfig).theme;
   } catch (e) {
@@ -43,9 +43,6 @@ module.exports = options => {
     throw new Error(`Unknown task: ${task}`);
   }
 
-  return require(`./tasks/${task}`)(settings)
-    .catch(e => {
-      throw e;
-    });
+  return require(`./tasks/${task}`)(settings);
 
 };
