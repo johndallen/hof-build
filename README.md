@@ -6,7 +6,7 @@ Performs build workflow for hof apps in prod and development
 Run a build by running `hof-build` from the command line in your project directory.
 
 ```
-hof build [task]
+hof-build [task]
 ```
 
 If no task is specified then all tasks will run.
