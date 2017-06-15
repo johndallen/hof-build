@@ -26,7 +26,7 @@
     "chokidar": "^1.6.1",
     "cp": "^0.2.0",
     "duplexify": "^3.5.0",
-    "hof-transpiler": "^2.0.0",
+    "hof-transpiler": "^2.0.2",
     "lodash.merge": "^4.6.0",
     "lodash.throttle": "^4.1.1",
     "lodash.uniq": "^4.5.0",
