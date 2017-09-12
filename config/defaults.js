@@ -26,7 +26,7 @@ module.exports = {
   },
   server: {
     cmd: 'npm start',
-    extensions: ['.js', '.json', '.html']
+    extensions: ['.js', '.json', '.html', '.md']
   },
   watch: {
     restart: 'rs',
