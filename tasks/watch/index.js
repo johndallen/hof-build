@@ -110,6 +110,10 @@ module.exports = config => {
         console.log('Ignoring node_modules directory. To watch node_modules run with --watch-node-modules flag');
         ignored.push('node_modules');
       }
+      if (!config.watchDotFiles) {
+        console.log('Ignoring dotfiles. To watch dotfiles run with --watch-dotfiles flag');
+        ignored.push(/(^|[\/\\])\../);
+      }
 
       const watcher = chokidar.watch('.', { ignored });
 

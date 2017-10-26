@@ -33,6 +33,7 @@ module.exports = options => {
 
   settings.production = options.production || process.env.NODE_ENV === 'production';
   settings.watchNodeModules = options['watch-node-modules'];
+  settings.watchDotFiles = options['watch-dotfiles'];
   settings.verbose = options.verbose;
 
   const task = options._[0] || 'build';
