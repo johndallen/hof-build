@@ -24,6 +24,8 @@ It is recommended to alias `hof-build` to an npm script in your package.json.
 
 You can additionally run a `watch` task to start a server instance, which will automatically restart based on changes to files. This will also re-perform the tasks above when relevant files change.
 
+By default files inside `node_modules` directories and dotfiles will not trigger a restart. If you want to include these files then you can set `--watch-node-modules` and `--watch-dotfiles` flags respectively.
+
 ## Configuration
 
 The default settings will match those for an app generated using [`hof-generator`](https://npmjs.com/hof-generator).
@@ -50,7 +52,7 @@ Each task has a common configuration format with the following options:
 
 * `src` - defines the input file or files for the build task
 * `out` - defines the output location of the built code where relevant
-* `match` - defines the pattern for files to watch to trigger a rebuilt of this task
+* `match` - defines the pattern for files to watch to trigger a rebuild of this task
 * `restart` - defines if this task should result in a server restart
 
 Additionally the server instance created by `watch` can be configured by setting `server` config. Available options are:
