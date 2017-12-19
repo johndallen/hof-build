@@ -5,6 +5,7 @@ const chokidar = require('chokidar');
 const throttle = require('lodash.throttle');
 const uniq = require('lodash.uniq');
 const cp = require('child_process');
+const path = require('path');
 const match = require('minimatch');
 const chalk = require('chalk');
 const extname = require('path').extname;
@@ -12,6 +13,7 @@ const extname = require('path').extname;
 const tasks = require('../');
 
 const run = require('../../lib/run');
+const env = require('../../lib/env');
 
 module.exports = config => {
 
@@ -134,9 +136,29 @@ module.exports = config => {
     });
   }
 
+  function loadenv() {
+    let envfile = '.env';
+    if (typeof config.env === 'string') {
+      envfile = config.env;
+    }
+    envfile = path.resolve(process.cwd(), envfile);
+    return env(envfile, !!config.env)
+      .then(dotenv => {
+        Object.keys(dotenv).forEach(key => {
+          if (process.env[key] && config.verbose) {
+            console.log(`  Overwriting environment variable ${key} with local value`);
+          }
+          process.env[key] = dotenv[key];
+        });
+      });
+  }
+
   return build(config)
     .then(() => {
       return watch();
+    })
+    .then(() => {
+      return loadenv();
     })
     .then(() => {
       return restart();
