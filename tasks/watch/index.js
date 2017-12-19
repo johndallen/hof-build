@@ -31,9 +31,9 @@ module.exports = config => {
     return map;
   }, {});
 
-  function triggersTask(path) {
+  function triggersTask(file) {
     return Object.keys(matchers).filter(key => {
-      return match(path, matchers[key]);
+      return match(file, matchers[key]);
     });
   }
 
@@ -62,11 +62,11 @@ module.exports = config => {
 
   function rebuild() {
     let jobs = [];
-    toBuild.forEach(path => {
+    toBuild.forEach(file => {
       if (config.verbose) {
-        console.log(`${chalk.yellow('Changed')}: ${path}`);
+        console.log(`${chalk.yellow('Changed')}: ${file}`);
       }
-      jobs = jobs.concat(triggersTask(path));
+      jobs = jobs.concat(triggersTask(file));
     });
     jobs = uniq(jobs);
 
