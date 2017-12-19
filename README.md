@@ -26,6 +26,23 @@ You can additionally run a `watch` task to start a server instance, which will a
 
 By default files inside `node_modules` directories and dotfiles will not trigger a restart. If you want to include these files then you can set `--watch-node-modules` and `--watch-dotfiles` flags respectively.
 
+### Local environment variables
+
+You can load local environment variables from a file by passing an `--env` flag to `hof-build watch` and creating a `.env` file in your project root that defines your local variables as follows:
+
+```
+MY_LOCAL_ENVVAR=foo
+MY_OTHER_ENVVAR=bar
+```
+
+_Note: `export` is not required, and values should not be quoted._
+
+To load variables from a file other than `.env` you should pass the location of the file as a value on the `--env` flag.
+
+```
+hof-build watch --env .envdev
+```
+
 ## Configuration
 
 The default settings will match those for an app generated using [`hof-generator`](https://npmjs.com/hof-generator).

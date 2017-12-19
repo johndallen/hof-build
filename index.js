@@ -35,6 +35,7 @@ module.exports = options => {
   settings.watchNodeModules = options['watch-node-modules'];
   settings.watchDotFiles = options['watch-dotfiles'];
   settings.verbose = options.verbose;
+  settings.env = options.env;
 
   const task = options._[0] || 'build';
 
