@@ -7,7 +7,9 @@
     "hof-build": "./bin/hof-build"
   },
   "scripts": {
-    "test": "eslint . && eslint bin/hof-build"
+    "test": "eslint . && eslint bin/hof-build",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -36,10 +38,12 @@
     "mkdirp": "^0.5.1",
     "npm-sass": "^2.2.1",
     "uglify-js": "^2.8.22",
-    "witch": "^1.0.0"
+    "witch": "^1.0.0",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "eslint": "^3.17.1",
     "eslint-config-homeoffice": "^2.1.2"
-  }
+  },
+  "snyk": true
 }
