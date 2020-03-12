@@ -33,7 +33,7 @@
     "lodash.uniq": "^4.5.0",
     "minimatch": "^3.0.3",
     "minimist": "^1.2.0",
-    "mkdirp": "^0.5.1",
+    "mkdirp": "^1.0.0",
     "npm-sass": "^2.2.1",
     "uglify-js": "^2.8.22",
     "witch": "^1.0.0"
